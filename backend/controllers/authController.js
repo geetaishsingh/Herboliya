@@ -195,7 +195,7 @@ export const VerifySignUpOtp = async (req, res) => {
 
 export const googleAuth = async (req, res) => {
   try {
-    const { fullname, emaiwl, phoneNo } = req.body;
+    const { fullname, email, phoneNo } = req.body;
     let user = await userModel.findOne({ email });
 
     if (!user) {
