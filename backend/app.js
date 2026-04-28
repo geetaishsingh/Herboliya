@@ -13,12 +13,26 @@ let port = process.env.PORT || 5000;
 app.use(cookieParser());
 
 app.use(express.json());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://herboliya.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://herboliya.vercel.app",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     credentials: true,
   }),
 );
+
+// 🔥 important
+app.options("*", cors());
 app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
 app.use("/api/auth", authRoute);
