@@ -20,6 +20,10 @@ const userSlice = createSlice({
     clearUser: (state) => {
       state.userData = null;
       state.loading = false;
+      state.cartItem = [];
+      state.totalAmount = 0;
+      state.likedItems = [];
+      state.myOrder = [];
     },
     startAuthCheck: (state) => {
       state.loading = true;
@@ -83,6 +87,12 @@ const userSlice = createSlice({
     setLikes: (state, action) => {
       state.likedItems = action.payload;
     },
+    addLikedItem: (state, action) => {
+      const exists = state.likedItems.some((item) => item._id === action.payload._id);
+      if (!exists) {
+        state.likedItems = [action.payload, ...state.likedItems];
+      }
+    },
     removeLikedItem: (state, action) => {
       state.likedItems = state.likedItems.filter(
         (item) => item._id !== action.payload,
@@ -102,6 +112,7 @@ export const {
   addMyOrder,
   updateOrderStatus,
   setLikes,
+  addLikedItem,
   removeLikedItem,
 } = userSlice.actions;
 

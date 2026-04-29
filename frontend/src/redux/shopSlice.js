@@ -22,6 +22,5 @@ const shopSlice = createSlice({
   },
 });
 
-export const { setItems, updateItems, removeLoading } =
-  shopSlice.actions;
+export const { setItems, updateItems, removeLoading } = shopSlice.actions;
 export default shopSlice.reducer;
