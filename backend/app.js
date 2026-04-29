@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://herboliya.vercel.app",
+    origin: ["https://herboliya.vercel.app", "https://herboliya-fp5u.onrender.com"],
     credentials: true,
   }),
 );
