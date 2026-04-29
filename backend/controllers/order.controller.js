@@ -1,21 +1,17 @@
 import order from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
-
 export const placeOrder = async (req, res) => {
   try {
     const { cartItem, deliveryAddress, payMentMethod, totalAmount } = req.body;
-
-    // 1. Validation Checks
-    if (!cartItem || cartItem.length === 0) {
+    if (!cartItem || cartItem.length == 0) {
       return res.status(400).json({ message: "CartItem is required" });
     }
     if (!deliveryAddress) {
       return res
         .status(400)
-        .json({ message: "Send Complete Delivery address" });
+        .json({ message: "Send Complete Delvivery address" });
     }
 
-    // 4. Create New Order
     const Order = await order.create({
       user: req.userId,
       payment: payMentMethod,
@@ -34,14 +30,11 @@ export const placeOrder = async (req, res) => {
     user.deliveryAddress = deliveryAddress;
     await user.save();
 
-    return res.status(201).json({
-      message: "Order is successfully placed",
-    });
-  } catch (error) {
-    console.error("Place Order Error:", error);
     return res
-      .status(500)
-      .json({ message: `Place order error: ${error.message}` });
+      .status(201)
+      .json({ message: "Order is successfully placed", Order });
+  } catch (error) {
+    return res.status(500).json({ message: `place order error ${error}` });
   }
 };
 
