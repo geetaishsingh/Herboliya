@@ -6,7 +6,7 @@ import { serverUrl } from "../App";
 const useGetLike = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchLikes = async () => {
       try {
         const { data } = await axios.get(
           `${serverUrl}/api/item/likes`,
@@ -19,7 +19,7 @@ const useGetLike = () => {
         console.log(err);
       }
     };
-    fetchUser();
+    fetchLikes();
   }, []);
 };
 

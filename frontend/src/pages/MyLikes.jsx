@@ -12,6 +12,7 @@ const MyLikes = () => {
   useEffect(() => {
     setLikes(likedItems);
   }, [likedItems]);
+  
   return (
     <div className="likes-container">
       <div className="inner-container">
@@ -37,5 +38,4 @@ const MyLikes = () => {
     </div>
   );
 };
-
 export default MyLikes;
